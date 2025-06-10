@@ -1,0 +1,8 @@
+prepare:
+  steps:
+    - command: npm install express http-proxy-middleware
+test:
+  steps: []
+run:
+  steps:
+    - command: node proxy.js
