@@ -1,0 +1,10 @@
+guacamole/guacamole-server/result/
+guacamole/user-mapping.xml
+
+guacamole/guacamole-client/conf/Catalina/
+guacamole/guacamole-client/logs/
+guacamole/guacamole-client/temp/
+guacamole/guacamole-client/webapps/guacamole/
+guacamole/guacamole-client/work/
+
+proxy/node_modules/

@@ -1,8 +1,43 @@
+schemaVersion: v0.2
 prepare:
   steps:
-    - command: npm install express http-proxy-middleware
+    - command: cd guacamole && ./user-mapping.sh
+    - command: cd proxy && npm install
+    - command: mkdir -p guacamole/guacamole-client/{logs,temp,work}
 test:
   steps: []
 run:
-  steps:
-    - command: node proxy.js
+  proxy:
+    steps:
+      - command: cd proxy && node proxy.js
+    plan: 8
+    replicas: 1
+    isPublic: true
+    network:
+      path: /
+      stripPath: false
+  tomcat-guacamole:
+    steps:
+      - command: nix-env -iA nixpkgs.guacamole-client nixpkgs.tomcat9 nixpkgs.jdk
+      - command: ~/.nix-profile/bin/catalina.sh run
+    plan: 8
+    replicas: 1
+    isPublic: true
+    network:
+      path: /guacamole
+      stripPath: false
+  guacd:
+    steps:
+      - command: cd /home/user/app/guacamole/guacamole-server && nix-build
+      - command: python3 -m http.server 3000 &
+      - command: ./guacamole/guacamole-server/result/bin/guacd -f -b 0.0.0.0 -l 4822
+    plan: 8
+    replicas: 1
+    isPublic: false
+    network:
+      ports:
+        - port: 3000
+          isPublic: false
+        - port: 4822
+          isPublic: false
+      paths: []
