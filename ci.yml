@@ -4,10 +4,10 @@ prepare:
     - command: cd guacamole && ./user-mapping.sh
     - command: mkdir -p guacamole/guacamole-client/{logs,temp,work}
     - name: Deploy Landscape
-      command: "echo \"curl -X 'POST'
-        'https://vms-plan-sel-dev.dev.codesphere.com/api/workspaces/$WORKSPACE_\
-        ID/landscape/deploy' -H 'accept: */*' -H 'Authorization: Bearer
-        CS_OwmPOgcjGj97DbxE+36NaMK0nsPsrshloc6TvMIwunjcGeRC' -d ''\""
+      command: "curl -X 'POST'
+        https://vm-demo-dev.dev.codesphere.com/api/workspaces/$WORKSPACE_\
+        ID/landscape/deploy -H 'accept: */*' -H 'Authorization: Bearer
+        CS_OwmPOgcjGj97DbxE+36NaMK0nsPsrshloc6TvMIwunjcGeRC' -d ''"
 test:
   steps: []
 run:
