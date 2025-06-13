@@ -37,7 +37,7 @@ run:
       - command: cd /home/user/app/guacamole/guacamole-server && nix-build
       - command: python3 -m http.server 3000 &
       - command: ./guacamole/guacamole-server/result/bin/guacd -f -b 0.0.0.0 -l 4822
-    plan: 8
+    plan: 9
     replicas: 1
     isPublic: false
     network:
