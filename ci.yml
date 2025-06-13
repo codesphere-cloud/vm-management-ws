@@ -2,7 +2,6 @@ schemaVersion: v0.2
 prepare:
   steps:
     - command: cd guacamole && ./user-mapping.sh
-    - command: cd proxy && npm install
     - command: mkdir -p guacamole/guacamole-client/{logs,temp,work}
     - name: Deploy Landscape
       command: "echo \"curl -X 'POST'
